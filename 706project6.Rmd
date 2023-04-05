@@ -1,0 +1,377 @@
+---
+title: ' '
+author: ' '
+date: ' '
+output:
+  word_document: default
+  bookdown::word_document2:
+    reference_docx: template_README_and_styles_3.docx
+    number_sections: no
+---
+
+```{r setup, echo=FALSE, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, fig.width=5, fig.height=5)
+
+
+# ######################################################################### #
+##                                                                         ##
+##  Author: [insert your name/email address                                ##
+##  Program: BIOSTAT702_FP_Lname_Fname.rmd                                 ##
+##  Purpose: This program performs the analyses and generates the report   ##
+##  for the BIOS 702 final project.                                        ##
+##                                                                         ##
+##  Input files:  [list data or source files]                              ##
+##                                                                         ##
+##  Output files: BIOSTAT702_FP_Lname_Fname.docx - Word file of the SAP    ##
+##                and report for these analyses                            ##
+##                                                                         ##
+##  Change Log:                                                            ##
+##  07/07/2022 File started                                                ##
+##                                                                         ##
+# ######################################################################### #
+
+# setwd()
+library(tidyverse)
+library(lubridate)
+library(knitr)
+
+options(knitr.kable.NA="")
+options(max.print = .Machine$integer.max)  # don't limit console printing
+
+rm(list=ls())
+```
+
+------------------------------------------------------------------------
+
+**Title**: 
+
+**Investigator(s)**: 
+
+**Biostatistician(s)**: [Insert your name]
+
+**Supervising Biostatistician**: N/A
+
+**Original Creation Date**: 
+
+**Project Folder Location**: [Give the directory where all project files are stored]
+
+**Project Goal(s)**: Written Report (will be used to inform a manuscript)
+
+**Submission Deadline(s)**: 
+
+------------------------------------------------------------------------
+
+**Activity Log**
+
+09/18/2022 File started
+
+------------------------------------------------------------------------
+
+# Study Overview
+
+## Background
+
+
+
+<br>
+
+
+
+<br>
+
+
+
+## Current Study {#Curr}
+
+
+
+## Study Aims
+
+### Aim 1
+
+Aim 1a: 
+
+Aim1b: 
+
+### Aim 2
+
+Aim 1a: 
+
+Aim1b: 
+
+## Study Hypotheses
+
+### Hypothesis 1
+
+[Insert hypothesis 1a]
+
+[Insert hypothesis 1b]
+
+### Hypothesis 2
+
+[Insert hypothesis 2a]
+
+[Insert hypothesis 2b]
+
+# Study Population
+
+[Describe the population of the parent study - See HW 1 as well)]
+
+## Inclusion/Exclusion Criteria
+
+[Describe who will be excluded from the study - see Section \@ref(Curr) ]
+
+## Data Acquisition
+
+**Study design**: [Describe study design of parent study and this current study]
+
+**Data source/how the data were collected**: [Describe how data were collected in the parent study]
+
+**Contact information for team member responsible for data acquisition**: 
+
+**Date or version (if downloaded, provide date)**: 
+
+**Data transfer method and date**: 
+
+**Where dataset is stored**: [Give the directory where you saved the raw files]
+
+Notes: *Include any additional details that give information about how this data set was acquired*
+
+# Outcomes, Exposures, and Variables of Interest
+
+## Primary Outcomes
+
++-------------+-------------------------------------------------+------------------------------------------------------------------------------------+
+| Outcome     | Description                                     | Specifications                                                                     |
++=============+=================================================+====================================================================================+
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
++-------------+-------------------------------------------------+------------------------------------------------------------------------------------+
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
++-------------+-------------------------------------------------+------------------------------------------------------------------------------------+
+
+## Primary Exposures
+
++-------------+--------------------------------------------------+-------------------------------------------------------------------------+
+| Exposure    | Description                                      | Specifications                                                          |
++=============+==================================================+=========================================================================+
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
++-------------+--------------------------------------------------+-------------------------------------------------------------------------+
+|             |                                                  |                                                                         |
++-------------+--------------------------------------------------+-------------------------------------------------------------------------+
+
+## Other Variables of Interest
+
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Outcome    | Description                            | Specifications                                                                                                                                 |
++============+========================================+================================================================================================================================================+
+|            |                                        |
+                                 |
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+|            |                                        |                                                                                                                                                |
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+|            |                                        |                                                                                                                                                |
+|            |                                        |                                                                                                                                                |
+|            |                                        |                                                                                                                                                |
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+|            |                                        |                                                                                                                                                |
+|            |                                        |                                                                                                                                                |
+|            |                                        |                                                                                                                                                |
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+
+# Statistical Analysis Plan
+
+
+
+*Every analysis step should refer back to an aim/hypothesis/objective.*
+
+## Analysis Plan for Aim 1
+
+### Aim 1A
+
+[insert analytic plan]
+
+### Aim 1B
+
+[insert analytic plan]
+
+## Analysis Plan for Aim 2
+
+### Aim 2A
+
+[insert analytic plan]
+
+### Aim 2B
+
+[insert analytic plan]
+
+*All of the above sections can and should be finalized before analyzing data.*
+
+# Statistical Analysis Results
+
+**Exploratory Analyses and CONSORT Numbers**
+
+```{r DataClean, echo=FALSE, results=FALSE}
+# In this chunk, read in the data
+
+
+# Apply the inclusion/exclusion criteria to the data
+# Make sure you clean the variables related to inclusion/exclusion as needed
+# first. This means CHECKING the variables and asking the PI if there are
+# values in the data that you did not expect.
+
+
+# this is only the first pass of data cleaning.
+```
+
+[Describe in words how the analytic dataset was created (e.g., what did you filter by in order to apply inclusion/exclusion criteria?)]
+
+*How many participants were in the raw data set? How many were excluded due to criterion 1? Of these, how many were excluded because of criterion 2? Of these...and so on. Be sure to fill in the blanks below with INLINE R code, not hardcoded numbers!* The ACTG data contained XXX participants. Of these, XXX were excluded for [insert criterion], YYY were excluded for [insert criterion], .... In this first pass of data cleaning, there were XXX eligible for further analyses.
+
+From this draft analytic dataset, we performed additional data cleaning and QCing.
+
+```{r MoreCleaning, results=FALSE}
+
+# In this chunk, perform additional data cleaning to make sure ALL the
+# variables in the data set conform to how they are described in the SAP.
+# For example, CD4 must be >=0.
+# viral load at week 24 must be dichotomized. But before dichotomizing, you
+# must clean the viral load variable as needed!
+# Make sure age makes sense
+# and so on
+# Create/extract/clean all variables defined in the SAP.
+
+```
+
+[Describe all oddities in the variables and what steps you performed to correct them.]
+
+```{r AnalyticData}
+# Create you final analytic data set here by removing anyone who has missing
+# data on the primary outcomes or exposures. (But keep those who have missing
+# data on the other variables in the SAP.)
+
+```
+
+*Describe the remaining exclusions based on missing outcomes and exposures*. Of the XXX individuals in the draft analytic dataset, XXX were missing CD4 data at week 24, XXX were missing HIV RNA at week 24, XXX were missing treatment assignment, and XXX was missing age, leaving XXX in the analytic dataset.
+
+```{r cleanup1}
+# optional: I like to clean up my workspace by removing objects I don't need
+# anymore. you can use the ?rm function to do so and list out the objects as
+# rm(aa, bb, cc)
+```
+
+**Graphical Displays**
+
+```{r ExplFigs, fig.width=4, fig.height=4}
+
+# In this chunk, visualize any variable you use in the analyses (including
+# those described in Table 1) using the plots described in the SAP.
+```
+
+*Here is where you put exploratory plots outlined in the SAP (e.g., univariate histograms and boxplots, exploratory scatterplots with LOESS, etc.)* [Describe each plot and whether they conform to what you expected to see.]
+
+**Table 1**
+
+```{r, echo=FALSE, include=FALSE}
+
+# In this chunk, perform the summaries needed to fill in the Table 1 shell
+# below.
+
+# You can use some of the tidyverse functions to create the needed summaries
+# such as ?summarize.
+
+
+```
+
+
+
+<br>
+
+[Because the table is stratified by arm, what do you expect to see for baseline covariates? What do you observe? Describe here.]
+
+
+## Analysis Results for Aim 1
+
+### Aim 1A
+
+```{r Aim1a, results=TRUE}
+
+# Perform the analyses for Aim 1a here
+
+```
+
+[Write a paragraph describing the results of Aim 1a.]
+
+
+### Aim 1B
+
+```{r Aim1b, results=TRUE}
+
+# Perform the analyses for Aim 1b here
+
+```
+
+[Write a paragraph describing the results of Aim 1b.]
+
+
+
+## Analysis Results for Aim 2
+
+### Aim 2A
+
+```{r Aim2a, results=TRUE}
+
+# Perform the analyses for Aim 2a here
+
+```
+
+[Write a paragraph describing the results of Aim 2a.]
+
+
+### Aim 2B
+
+```{r Aim2b, results=TRUE}
+
+# Perform the analyses for Aim 2b here
+
+```
+
+[Write a paragraph describing the results of Aim 2b.]
+
+
+# Addendum for Post-Hoc Analyses
+
+*All post-hoc analyses should be described here. If minor changes are made to the main analysis (e.g. adding a covariate to the model), this can be changed in the main analysis section above and a note should be added to the activity log.*
+
+# Appendix
+
+*This section can be used to include table shells, example figures, or anything else that does not belong in the body of the SAP but you feel should be included.*
+
+# References
+
+
+
+
+
+
+
+# Session Info
+
+```{r}
+sessionInfo()
+```
+
+<br>
+
+--- END OF REPORT ---
