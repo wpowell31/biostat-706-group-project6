@@ -1,0 +1,347 @@
+---
+title: "Biostat 706 Project 6"
+author: "Will Powell"
+date: ' '
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  bookdown::word_document2:
+    number_sections: no
+---
+
+```{r setup, echo=FALSE, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, fig.width=5, fig.height=5)
+
+
+# ######################################################################### #
+##                                                                         ##
+##  Author: Will Powell                                                    ##
+##  Program: 707project6.rmd                                               ##
+##  Purpose: This program performs the analyses and generates the report   ##
+##  for the BIOS 706 project 6.                                            ##
+##                                                                         ##
+##  Input files:  [list data or source files]                              ##
+##                                                                         ##
+##  Output files: 706project6.docx - Word file of the SAP                  ##
+##                and report for these analyses                            ##
+##                                                                         ##
+##  Change Log:                                                            ##
+##  04/08/2023 File started                                                ##
+##                                                                         ##
+# ######################################################################### #
+
+# setwd()
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(flextable)
+
+options(knitr.kable.NA="")
+options(max.print = .Machine$integer.max)  # don't limit console printing
+
+rm(list=ls())
+```
+
+------------------------------------------------------------------------
+
+**Title**: Is Smoking Associated With LDL 
+
+**Investigator(s)**: Elizabeth Hauser, PhD
+
+**Biostatistician(s)**: Xuanyin Zhao, Will Powell, Yuan Wang, Alex Da Silva
+
+**Original Creation Date**: 4/5/2023
+
+**Project Folder Location**: https://github.com/wpowell31/biostat-706-group-project6
+
+**Project Goal(s)**: Describe the relationship between smoking and LDL in the Framingham Heart Study
+
+**Submission Deadline(s)**: 4/19/2023 
+
+------------------------------------------------------------------------
+
+**Acronyms**        LDLC        Low Density Lipoprotein Cholesterol(mg/DL)
+
+------------------------------------------------------------------------
+
+# Study Overview
+
+## Background
+
+Background/Introduction: The Framingham Heart Study is a prospective study that investigates the causes of cardiovascular disease in a community of individuals residing in Framingham, Massachusetts. The study began in 1948 with the enrollment of 5,209 participants, who have since undergone biennial examinations. The study continues to follow all participants through regular monitoring to detect any occurrences of cardiovascular events. This report uses a subset of the data collected as part of the Framingham study and tests the association between smoking and low-density lipoprotein cholesterol. 
+
+
+<br>
+
+
+
+<br>
+
+
+
+## Study Aims
+
+### Aim 1
+
+Describe the distribution of smoking and LDLC and test the association of smoking and low LDLC in period 3. 
+
+
+## Study Hypotheses
+
+### Hypothesis 1
+
+$H_O$: There is no association between smoking and low LDLC in Period 3.  
+
+$H_A$: There is an association between smoking and low LDLC in Period 3. 
+
+# Study Population
+
+The dataset I Framingham dataset provided by NHLBI. The Framingham study is one of the most important studies conducted in the US. It started in 1948 and still going on, and there were 3,394 papers published on the study(Framingham Heart Study). The Framingham Heart Study is a long term prospective study of the etiology of cardiovascular disease among a population of free living subjects in the community. The data is provided in longitudinal form. Each participant has 1 to 3 observations depending on the number of exams the subject attended, and as a result there are 11,627 observations on the 4,434 participants. 
+
+## Inclusion/Exclusion Criteria
+
+Inclusion Criteria 
+
+Framingham participants have 3 visits. 
+
+Exclusion Criteria 
+
+Framingham participants have 1 or 2 visits. 
+
+Framingham participants with NA 
+
+LDLC with NA values 
+
+## Data Acquisition
+
+
+**Data source/how the data were collected**: frmgham2.csv 
+
+Framingham Dataset, provided by NHLBI 
+
+**Contact information for team member responsible for data acquisition**: xz345@duke.edu 
+
+ Will.powell@duke.edu 
+
+Alexandra.da.silvia@duke.edu 
+
+Yuan.wang2@duke.edu 
+
+**Date or version (if downloaded, provide date)**: Version1, 4/10/2023 
+
+**Data transfer method and date**: Transfer from csv into R dataset on 4/10/2023 
+
+**Where dataset is stored**: R
+
+Notes: *Include any additional details that give information about how this data set was acquired*
+
+
+
+# Outcomes, Exposures, and Variables of Interest
+
+## Primary Outcomes
+
++-------------+-------------------------------------------------+------------------------------------------------------------------------------------+
+| Outcome     | Description                                     | Specifications                                                                     |
++=============+=================================================+====================================================================================+
+|    LDLC     | Low Density Lipoprotein Cholesterol (mg/dL)     |    From Framingham Dataset, Continuous                                             |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
++-------------+-------------------------------------------------+------------------------------------------------------------------------------------+
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
+|             |                                                 |                                                                                    |
++-------------+-------------------------------------------------+------------------------------------------------------------------------------------+
+
+## Primary Exposures
+
++-------------+--------------------------------------------------+-------------------------------------------------------------------------+
+| Exposure    | Description                                      | Specifications                                                          |
++=============+==================================================+=========================================================================+
+|             |                                                  |                                                                         |
+|  CURSMOKE   |    Current cigarette smoking at exam             |  Categorical (0 = Not current smoker, 1 = Current smoker)               |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
+|             |                                                  |                                                                         |
++-------------+--------------------------------------------------+-------------------------------------------------------------------------+
+|             |                                                  |                                                                         |
++-------------+--------------------------------------------------+-------------------------------------------------------------------------+
+
+## Other Variables of Interest
+
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Outcome    | Description                            | Specifications                                                                                                                                 |
++============+========================================+================================================================================================================================================+
+| PERIOD     |                                        |
+                                 |
++------------+----------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+# Statistical Analysis Plan
+
+
+
+## Analysis Plan for Aim 1
+
+We will assume the non-smoking population and smoking population are independent. We will then assume that the LDLC levels in both of these populations are normally distributed and are randomly sampled. We can check the assumption for normality with qqplots and histograms with density plots overlayed to check for normality within each population. Given the assumptions made and the populations being compared, a two sample t test would be an appropriate test to perform. 
+
+First, we will let $\mu_1$ and $\mu_2$ be the unknown mean of LDLC levels in smoking and non-smoking populations, respectively. We will assume the variances of the two populations are unknown and equal, however we can compare the variances of the sampled populations using a variance ratio test to see if this assumption holds. If it does not, then using a Satterthwait approximation of the degrees of freedom and using the independent variances in the test statistic formula as opposed to the pooled variance described below. 
+
+Next, we will define the unknown difference in means $\delta=\mu_1-\mu_2$. Therefore, our hypotheses would be 
+$H_0: \delta=0$ vs. $H_A: \delta \neq 0$, where $\delta$ is defined as above
+
+$H_0: \mu_1=\mu_2$ vs. $H_A: \mu_1 \neq \mu_2$, where $\mu_1$ and $\mu_2$ are defined above
+
+Our sampling distribution is 
+
+$$D \sim N \left( \mu_1 -\mu_2, \; \frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2} \right)$$
+ 
+ 
+
+where D is the unbiased estimator of $\delta$ and is equal to the difference in means of our two populations. Additionally, the unbiased estimator of $\sigma^2$ is $S_p^2$, which has a formula of 
+
+$$S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{(n_1-1) + (n_2-1)}$$
+ 
+ 
+
+. Our computed test statistic would be 
+
+$$T = \frac{(\bar{Y}_1 - \bar{Y}_2) - \delta_0}{\sqrt{\frac{S_p^2}{n_1} + \frac{S_p^2}{n_2}}} \sim t_{n_1 +n_2 -2} \textrm{ under } H_0.$$
+ 
+ 
+
+If we find that there is enough evidence to reject the null hypothesis, we can conclude that there is evidence to suggest that the two means of LDLC levels in the smoking and non-smoking populations are different. 
+
+# Statistical Analysis Results
+
+**Exploratory Analyses and CONSORT Numbers**
+
+```{r DataClean, echo=FALSE, results=FALSE}
+# In this chunk, read in the data
+data <- read.csv("frmgham2.csv")
+
+data_clean <- data %>%
+  filter(PERIOD == 3) %>%
+  filter(!is.na(LDLC)) %>%
+  filter(!is.na(CURSMOKE))
+
+# Apply the inclusion/exclusion criteria to the data
+# Make sure you clean the variables related to inclusion/exclusion as needed
+# first. This means CHECKING the variables and asking the PI if there are
+# values in the data that you did not expect.
+
+
+# this is only the first pass of data cleaning.
+```
+
+The initial dataset had `r nrow(data)`. Following filtering for individuals in period 3, and removing NA values for LDLC and smoking, the final analytic dataset had `r nrow(data_clean)` rows
+
+
+
+
+
+
+**Graphical Displays**
+
+```{r ExplFigs, fig.width=4, fig.height=4}
+
+# In this chunk, visualize any variable you use in the analyses (including
+# those described in Table 1) using the plots described in the SAP.
+out <- lm(LDLC~CURSMOKE, data=data_clean, x=TRUE, y=TRUE)
+plot(out)
+```
+
+
+We can see from the above plots that assumptions are not violated and it is safe to proceed with the analysis.
+
+
+
+
+
+<br>
+
+
+
+
+## Analysis Results for Aim 1
+
+## Hypothesis Test for the Difference in Means
+
+**Step 1**: Let $\mu_1$ and $\mu_2$ be the unknown mean of Population 1 and Population 2, respectively. We assume the variances of the two populations are **unknown and equal**. Define $\delta = \mu_1 - \mu_2$. 
+
+<br>
+
+**Step 2**: The following sets of hypotheses are equivalent
+
+$H_0: \delta=0$ vs. $H_A: \delta \neq 0$, where $\delta$ is defined as above
+
+$H_0: \mu_1=\mu_2$ vs. $H_A: \mu_1 \neq \mu_2$, where $\mu_1$ and $\mu_2$ are defined above
+
+<br>
+
+**Step 3**: The test statistic is
+
+$$T = \frac{(\bar{Y}_1 - \bar{Y}_2) - \delta_0}{\sqrt{\frac{S_p^2}{n_1} + \frac{S_p^2}{n_2}}} \sim t_{n_1 +n_2 -2} \textrm{ under } H_0.$$
+
+
+
+```{r Aim1a, results=TRUE}
+
+# Perform the analyses for Aim 1a here
+
+#head(data)
+t.test(data_clean[data_clean$CURSMOKE == 0,]$LDLC, data_clean[data_clean$CURSMOKE == 1,]$LDLC)
+
+
+```
+
+The pooled variance is
+
+```{r, echo=FALSE}
+
+Y1 <- data_clean[data_clean$CURSMOKE == 0,]$LDLC
+Y2 <- data_clean[data_clean$CURSMOKE == 1,]$LDLC
+
+n1 <- length(Y1)
+n2 <- length(Y2)
+
+SD1 <- sd(Y1)
+SD2 <- sd(Y2)
+
+Yb1 <- mean(Y1)
+Yb2 <- mean(Y2)
+
+Spool <- sqrt( ((n1-1)*SD1^2 + (n2-1)*SD2^2) / ((n1-1) + (n2-1)) )
+```
+
+
+$$S_p^2 = \frac{(`r n1`-1)(`r round(SD1, 3)`)^2 + (`r n2`-1)(`r round(SD2, 3)`)^2}{(`r n1`-1) + (`r n2`-1)} = `r round(Spool^2, 3)`$$
+
+Note that the pooled SD is $\sqrt{`r round(Spool^2, 3)`} = `r round(Spool, 3)`$
+
+
+A 95% CI for the difference in population mean eGFR among those with low SES and those with medium or high SES is
+
+$$(`r round(Yb1, 3)` - `r round(Yb2, 3)`) \pm `r round(qt(1-0.05/2, df=n1+n2-2), 3)` \sqrt{\frac{(`r round(Spool, 3)`)^2}{`r n1`} + \frac{(`r round(Spool, 3)`)^2}{`r n2`}} \; \Rightarrow \; (`r paste(round(confint(out, level=0.95)[2,], 3), collapse=", ")`).$$
+
+
+We can see that given the confidence interval above includes zero, we fail to reject the $H_O$ hypothesis. We do not have evidence that there is an association between smoking and LDLC in period 3.
+
+# References
+
+
+
+# Session Info
+
+```{r}
+sessionInfo()
+```
+
+<br>
+
+--- END OF REPORT ---
